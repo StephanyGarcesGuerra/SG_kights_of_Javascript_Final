@@ -134,6 +134,7 @@ function attackPlayerTwo() {
 function attackPlayerOne() {
     if (gameState.whoseTurn === 2) {
         function changeButtonStatus() {
+            //making the button for "attack  player one" is changin from inactive to active
             let playerOneAttackButton = document.getElementById("playerOneAttack");
             playerOneAttackButton.disabled = true;
             playerOneAttackButton.classList.add("inactive");
@@ -144,12 +145,13 @@ function attackPlayerOne() {
             playerTwoAttackButton.classList.add("active");
             playerTwoAttackButton.classList.remove("inactive");
         }
-
+        //  adding the correct images 
         function animatePlayer() {
             let playerTwoFrames = [
                 "./images/L_Idle.png",
                 "./images/L_Attack.png"
             ];
+            // removes the 'idle' class from the player sprite
 
             let playerSprite = document.getElementById("playerTwoSprite");
             playerSprite.src = playerTwoFrames[1];
@@ -173,16 +175,18 @@ function attackPlayerOne() {
 
             setTimeout(changePlayerTwoSprite, 350);
         }
-
+        //removes health from player one when player two attacks player one
         let playerOneHealth = document.getElementById("playerOneHealth");
         let playerOneHealthNum = Number(playerOneHealth.innerHTML);
         playerOneHealthNum -= 10;
         playerOneHealth.innerHTML = playerOneHealthNum;
-
+        
+        //checking to end if health is zero
         if (playerOneHealthNum <= 0) {
             playerOneHealth.innerHTML = 0;
             gameOver();
         } else {
+            //calling the other fucntions if no player has reached a health of zero (ie if game is nor over)
             animatePlayer();
             changeButtonStatus();
             gameState.whoseTurn = 1;
